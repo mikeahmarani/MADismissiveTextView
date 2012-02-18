@@ -16,7 +16,6 @@
 
 - (void)keyboardWillShow;
 - (void)keyboardDidShow;
-- (void)keyboardDidHide;
 - (void)panning:(UIPanGestureRecognizer *)pan;
 
 @end
@@ -34,14 +33,13 @@
     if (self) {
         self.editable = YES;
         self.inputAccessoryView = [[UIView alloc] init];
-        
+ 
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning:)];
         self.panGesture.delegate = self;
-        [[[[UIApplication sharedApplication] windows] objectAtIndex:0] addGestureRecognizer:self.panGesture];        
+        [[[[UIApplication sharedApplication] windows] objectAtIndex:0] addGestureRecognizer:self.panGesture];                
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:@"UIKeyboardWillShowNotification" object:nil];                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow) name:@"UIKeyboardDidShowNotification" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide) name:@"UIKeyboardDidHideNotification" object:nil];        
     }
     return self;
 }
@@ -59,11 +57,7 @@
     [self.keyboardDelegate keyboardDidAppear];
 }
 
-- (void)keyboardDidHide{
-}
-
 - (void)panning:(UIPanGestureRecognizer *)pan{
-    NSLog(@"asdsad");
     if(self.keyboard && !self.keyboard.hidden){
         UIWindow *panWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
         CGPoint location = [pan locationInView:panWindow];
@@ -86,7 +80,7 @@
             }else{
                 self.panGesture.enabled = NO;
                 [self.keyboardDelegate keyboardWillSnapBack];
-                [UIView animateWithDuration:0.2 animations:^{
+                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 } completion:^(BOOL finished){
                     self.panGesture.enabled = YES;

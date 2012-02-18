@@ -54,11 +54,13 @@
 }
 
 - (void)keyboardWillGetDismissed{
-    self.scrollView.frame = CGRectMake(0, 44, 320, 416); 
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.scrollView.frame = CGRectMake(0, 44, 320, 416);         
+    }completion:nil];
 }
 
 - (void)keyboardWillSnapBack{
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.scrollView.frame = CGRectMake(0, 44, 320, 200);         
     }completion:nil];
 }
