@@ -1,6 +1,6 @@
 h1. MADismissiveTextView
 
-MADismissiveTextView is a drop-in `UITextView` subclass that handles dismissing the keyboard with your finger, just like in the Messages.app.
+MADismissiveTextView is a drop-in @UITextView@ subclass that handles dismissing the keyboard with your finger, just like in the Messages.app.
 
 h2. Usage
 
