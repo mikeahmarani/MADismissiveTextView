@@ -25,6 +25,7 @@
         self.scrollView.backgroundColor = [UIColor whiteColor];
         self.scrollView.contentSize = CGSizeMake(320, 1000);
         self.scrollView.bounces = YES;
+//        self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.scrollView];
         
         UILabel *lorem = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 1000)];
@@ -49,22 +50,21 @@
 #pragma mark MADismissiveKeyboardDelegate
 
 - (void)keyboardDidAppear{
-    self.scrollView.frame = CGRectMake(0, 44, 320, 200);
-}
-
-- (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
-    self.scrollView.frame = CGRectMake(0, 44, 320, keyboardOrigin.y-64);
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
+    self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 216, 0);
 }
 
 - (void)keyboardWillGetDismissed{
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.scrollView.frame = CGRectMake(0, 44, 320, 416);         
+        self.scrollView.contentInset = UIEdgeInsetsZero;
+        self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
     }completion:nil];
 }
 
 - (void)keyboardWillSnapBack{
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.scrollView.frame = CGRectMake(0, 44, 320, 200);         
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
+        self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 216, 0);
     }completion:nil];
 }
 
