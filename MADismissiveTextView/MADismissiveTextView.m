@@ -36,7 +36,7 @@
  
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning:)];
         self.panGesture.delegate = self;
-        [[[[UIApplication sharedApplication] windows] objectAtIndex:0] addGestureRecognizer:self.panGesture];                
+        [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.panGesture];                
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:@"UIKeyboardWillShowNotification" object:nil];                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow) name:@"UIKeyboardDidShowNotification" object:nil];

@@ -20,13 +20,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if(self){
-        MADismissiveTextView *textView = [[MADismissiveTextView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        textView.keyboardDelegate = self;
-        textView.font = [UIFont fontWithName:@"HelveticaNeue" size:22];
-        textView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
-        [self.view addSubview:textView];
-        
+    if(self){        
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 416)];
         self.scrollView.backgroundColor = [UIColor whiteColor];
         self.scrollView.contentSize = CGSizeMake(320, 1000);
@@ -42,8 +36,16 @@
     return self;
 }
 
-#pragma -
-#pragma mark MADismissiveTextView Delegate Methods
+- (void)viewDidAppear:(BOOL)animated{
+    MADismissiveTextView *textView = [[MADismissiveTextView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    textView.keyboardDelegate = self;
+    textView.font = [UIFont fontWithName:@"HelveticaNeue" size:22];
+    textView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    [self.view addSubview:textView];    
+}
+
+#pragma mark -
+#pragma mark MADismissiveKeyboardDelegate
 
 - (void)keyboardDidAppear{
     self.scrollView.frame = CGRectMake(0, 44, 320, 200);
@@ -65,6 +67,7 @@
     }completion:nil];
 }
 
+#pragma mark -
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
