@@ -58,7 +58,7 @@
 
 - (void)panning:(UIPanGestureRecognizer *)pan{
     if(self.keyboard && !self.keyboard.hidden){
-        UIWindow *panWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+        UIWindow *panWindow = [[UIApplication sharedApplication] keyWindow];
         CGPoint location = [pan locationInView:panWindow];
         CGPoint velocity = [pan velocityInView:panWindow];
         
