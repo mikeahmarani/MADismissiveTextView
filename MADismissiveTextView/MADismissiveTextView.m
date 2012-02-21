@@ -1,9 +1,9 @@
 //
 //  MADismissiveTextView.m
-//  Sample
+//  MADismissiveTextView
 //
 //  Created by Mike Ahmarani on 12-02-18.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Mike Ahmarani. All rights reserved.
 //
 
 #import "MADismissiveTextView.h"
