@@ -53,7 +53,6 @@
 }
 
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
-    NSLog(@"asdasd");
     self.scrollView.frame = CGRectMake(0, 44, 320, keyboardOrigin.y-64);
 }
 
