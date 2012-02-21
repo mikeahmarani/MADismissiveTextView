@@ -1,10 +1,10 @@
 h1. MADismissiveTextView
 
-MADismissiveTextView is a drop-in UITextView subclass that handles dismissing the keyboard with your finger, just like in the Messages.app.
+MADismissiveTextView is a drop-in <code>UITextView</code> subclass that handles dismissing the keyboard with your finger, just like in the Messages.app.
 
 h2. Usage
 
-MADismissiveTextView is designed to be used in tandem with a UIScrollView or subclass as well as its UIPanGestureRecognizer. As such, *this class only works with iOS 5.0 and up*.
+<code>MADismissiveTextView</code> is designed to be used in tandem with a <code>UIScrollView</code> as well as its <code>UIPanGestureRecognizer</code>. As such, *this class only works with iOS 5.0 and up*.
 
 h3. Example
 
@@ -20,7 +20,7 @@ textView.keyboardDelegate = self;
 
 h3. Dismissive Keyboard Delegate
 
-The MADismissiveKeyboardDelegate protocol allows you to make changes to your UI at key moments during the animation of the UIKeyboard. These delegate methods are all optional.
+The <code>MADismissiveKeyboardDelegate</code> protocol allows you to make changes to your UI at key moments during the animation of the <code>UIKeyboard</code>. These delegate methods are all optional.
 
 <pre>
 - (void)keyboardDidShow;
