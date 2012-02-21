@@ -11,7 +11,7 @@
 @protocol MADismissiveKeyboardDelegate <NSObject>
 
 @optional
-- (void)keyboardDidAppear;
+- (void)keyboardDidShow;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
 - (void)keyboardWillGetDismissed;
 - (void)keyboardWillSnapBack;

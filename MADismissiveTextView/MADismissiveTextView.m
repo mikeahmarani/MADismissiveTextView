@@ -52,7 +52,7 @@
 - (void)keyboardDidShow{
     self.keyboard = self.inputAccessoryView.superview;
     if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidAppear)]){
-        [self.keyboardDelegate keyboardDidAppear];
+        [self.keyboardDelegate keyboardDidShow];
     }
 }
 
@@ -69,7 +69,7 @@
                 if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillGetDismissed)]){                
                     [self.keyboardDelegate keyboardWillGetDismissed];
                 }
-                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, 480, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 }completion:^(BOOL finished){
                     self.keyboard.hidden = YES;
@@ -80,7 +80,7 @@
                 if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillSnapBack)]){
                     [self.keyboardDelegate keyboardWillSnapBack];
                 }
-                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 } completion:^(BOOL finished){
                 }];

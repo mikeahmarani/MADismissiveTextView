@@ -49,7 +49,7 @@
 #pragma mark -
 #pragma mark MADismissiveKeyboardDelegate
 
-- (void)keyboardDidAppear{
+- (void)keyboardDidShow{
     self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
     self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 216, 0);
 }
