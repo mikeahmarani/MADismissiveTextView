@@ -11,8 +11,8 @@
 @interface MADismissiveTextView ()
 
 @property (nonatomic, retain) UIView *keyboard;
-@property (nonatomic, retain) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, readwrite) float originalKeyboardY; 
+
 
 - (void)keyboardWillShow;
 - (void)keyboardDidShow;
@@ -22,9 +22,10 @@
 
 @implementation MADismissiveTextView
 
-@synthesize keyboard, panGesture, originalKeyboardY, keyboardDelegate;
+@synthesize keyboard, dismissivePanGestureRecognizer, originalKeyboardY, keyboardDelegate;
 
 - (void)dealloc{
+    [dismissivePanGestureRecognizer removeTarget:self action:@selector(panning:)];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -32,20 +33,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.editable = YES;
-        self.inputAccessoryView = [[UIView alloc] init];
- 
-        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning:)];
-        self.panGesture.delegate = self;
-        [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.panGesture];                
-        
+        self.inputAccessoryView = [[UIView alloc] init]; //Empty view just to get a handle on the keyboard.        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:@"UIKeyboardWillShowNotification" object:nil];                
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow) name:@"UIKeyboardDidShowNotification" object:nil];
     }
     return self;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
-    return YES;
+- (void)setDismissivePanGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
+    dismissivePanGestureRecognizer = panGestureRecognizer;
+    [dismissivePanGestureRecognizer addTarget:self action:@selector(panning:)];
 }
 
 - (void)keyboardWillShow{
@@ -54,7 +51,7 @@
 
 - (void)keyboardDidShow{
     self.keyboard = self.inputAccessoryView.superview;
-    if(self.delegate){
+    if(self.keyboardDelegate){
         [self.keyboardDelegate keyboardDidAppear];
     }
 }
@@ -69,27 +66,23 @@
             self.originalKeyboardY = self.keyboard.frame.origin.y;
         }else if(pan.state == UIGestureRecognizerStateEnded){
             if(velocity.y > 0 && self.keyboard.frame.origin.y > self.originalKeyboardY){
-                self.panGesture.enabled = NO;
-                if(self.delegate){                
+                if(self.keyboardDelegate){                
                     [self.keyboardDelegate keyboardWillGetDismissed];
                 }
                 [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, 480, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 }completion:^(BOOL finished){
-                    self.panGesture.enabled = YES;
                     self.keyboard.hidden = YES;
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                     [self resignFirstResponder];                          
                 }];
             }else{
-                self.panGesture.enabled = NO;
-                if(self.delegate){
+                if(self.keyboardDelegate){
                     [self.keyboardDelegate keyboardWillSnapBack];
                 }
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 } completion:^(BOOL finished){
-                    self.panGesture.enabled = YES;
                 }];
             }
         }else{
@@ -99,7 +92,7 @@
                 newKeyboardY = newKeyboardY > 480 ? 480:newKeyboardY;
             
                 self.keyboard.frame = CGRectMake(0, newKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
-                if(self.delegate){
+                if(self.keyboardDelegate){
                     [self.keyboardDelegate keyboardDidScroll:CGPointMake(0, newKeyboardY)];
                 }
             }

@@ -39,6 +39,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     MADismissiveTextView *textView = [[MADismissiveTextView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     textView.keyboardDelegate = self;
+    textView.dismissivePanGestureRecognizer = self.scrollView.panGestureRecognizer;
     textView.font = [UIFont fontWithName:@"HelveticaNeue" size:22];
     textView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     [self.view addSubview:textView];    
@@ -52,6 +53,7 @@
 }
 
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
+    NSLog(@"asdasd");
     self.scrollView.frame = CGRectMake(0, 44, 320, keyboardOrigin.y-64);
 }
 
