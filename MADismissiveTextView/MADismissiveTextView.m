@@ -54,7 +54,9 @@
 
 - (void)keyboardDidShow{
     self.keyboard = self.inputAccessoryView.superview;
-    [self.keyboardDelegate keyboardDidAppear];
+    if(self.delegate){
+        [self.keyboardDelegate keyboardDidAppear];
+    }
 }
 
 - (void)panning:(UIPanGestureRecognizer *)pan{
@@ -68,7 +70,9 @@
         }else if(pan.state == UIGestureRecognizerStateEnded){
             if(velocity.y > 0 && self.keyboard.frame.origin.y > self.originalKeyboardY){
                 self.panGesture.enabled = NO;
-                [self.keyboardDelegate keyboardWillGetDismissed];
+                if(self.delegate){                
+                    [self.keyboardDelegate keyboardWillGetDismissed];
+                }
                 [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, 480, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 }completion:^(BOOL finished){
@@ -79,7 +83,9 @@
                 }];
             }else{
                 self.panGesture.enabled = NO;
-                [self.keyboardDelegate keyboardWillSnapBack];
+                if(self.delegate){
+                    [self.keyboardDelegate keyboardWillSnapBack];
+                }
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 } completion:^(BOOL finished){
@@ -93,7 +99,9 @@
                 newKeyboardY = newKeyboardY > 480 ? 480:newKeyboardY;
             
                 self.keyboard.frame = CGRectMake(0, newKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
-                [self.keyboardDelegate keyboardDidScroll:CGPointMake(0, newKeyboardY)];
+                if(self.delegate){
+                    [self.keyboardDelegate keyboardDidScroll:CGPointMake(0, newKeyboardY)];
+                }
             }
         }
     }

@@ -10,6 +10,7 @@
 
 @protocol MADismissiveKeyboardDelegate
 
+@optional
 - (void)keyboardDidAppear;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
 - (void)keyboardWillGetDismissed;
