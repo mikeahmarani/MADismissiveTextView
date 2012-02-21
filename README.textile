@@ -2,8 +2,6 @@ h1. MADismissiveTextView
 
 MADismissiveTextView is a drop-in UITextView subclass that handles dismissing the keyboard with your finger, just like in the Messages.app.
 
-!http://www.mikeahmarani.com/github/MAConfirmButton.png!
-
 h2. Usage
 
 MADismissiveTextView is designed to be used in tandem with a UIScrollView or subclass as well as its UIPanGestureRecognizer. As such, *this class only works with iOS 5.0 and up*.
