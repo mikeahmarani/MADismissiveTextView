@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol MADismissiveKeyboardDelegate
+@protocol MADismissiveKeyboardDelegate <NSObject>
 
 @optional
 - (void)keyboardDidAppear;
@@ -20,7 +20,7 @@
 
 @interface MADismissiveTextView : UITextView
 
-@property (nonatomic, assign) id<MADismissiveKeyboardDelegate> keyboardDelegate;
+@property (nonatomic, assign) id <MADismissiveKeyboardDelegate> keyboardDelegate;
 @property (nonatomic, retain) UIPanGestureRecognizer *dismissivePanGestureRecognizer;
 
 @end
