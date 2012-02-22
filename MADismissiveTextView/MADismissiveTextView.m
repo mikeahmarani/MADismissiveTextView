@@ -25,8 +25,10 @@
 @synthesize keyboard, dismissivePanGestureRecognizer, originalKeyboardY, keyboardDelegate;
 
 - (void)dealloc{
-    [dismissivePanGestureRecognizer removeTarget:self action:@selector(panning:)];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
+    [self.dismissivePanGestureRecognizer removeTarget:self action:@selector(panning:)];
+    self.dismissivePanGestureRecognizer = nil;    
+    self.keyboardDelegate = nil;    
 }
 
 - (id)initWithFrame:(CGRect)frame{
