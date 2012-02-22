@@ -25,7 +25,6 @@
         self.scrollView.backgroundColor = [UIColor whiteColor];
         self.scrollView.contentSize = CGSizeMake(320, 1000);
         self.scrollView.bounces = YES;
-//        self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.scrollView];
         
         UILabel *lorem = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 1000)];
