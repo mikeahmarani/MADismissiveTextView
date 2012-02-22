@@ -54,7 +54,7 @@
 
 - (void)keyboardDidShow{
     self.keyboard = self.inputAccessoryView.superview;
-    if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidAppear)]){
+    if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)]){
         [self.keyboardDelegate keyboardDidShow];
     }
 }
@@ -75,8 +75,8 @@
             
             if(velocity.y > 0 && self.keyboard.frame.origin.y > self.originalKeyboardY){ //Gesture ended with a flick downwards, dismiss keyboard.
                 
-                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillGetDismissed)]){                
-                    [self.keyboardDelegate keyboardWillGetDismissed];
+                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)]){                
+                    [self.keyboardDelegate keyboardWillBeDismissed];
                 }
                 
                 [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{

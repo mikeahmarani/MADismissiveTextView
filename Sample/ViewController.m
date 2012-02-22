@@ -53,7 +53,7 @@
     self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 216, 0);
 }
 
-- (void)keyboardWillGetDismissed{
+- (void)keyboardWillBeDismissed{
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.scrollView.contentInset = UIEdgeInsetsZero;
         self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;

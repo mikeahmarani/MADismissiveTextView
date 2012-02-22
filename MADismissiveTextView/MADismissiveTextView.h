@@ -13,7 +13,7 @@
 @optional
 - (void)keyboardDidShow;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
-- (void)keyboardWillGetDismissed;
+- (void)keyboardWillBeDismissed;
 - (void)keyboardWillSnapBack;
 
 @end
