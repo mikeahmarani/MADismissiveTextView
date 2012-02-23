@@ -13,7 +13,6 @@
 @property (nonatomic, retain) UIView *keyboard;
 @property (nonatomic, readwrite) float originalKeyboardY; 
 
-
 - (void)keyboardWillShow;
 - (void)keyboardDidShow;
 - (void)panning:(UIPanGestureRecognizer *)pan;
