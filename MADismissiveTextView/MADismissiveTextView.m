@@ -10,7 +10,7 @@
 
 @interface MADismissiveTextView ()
 
-@property (nonatomic, retain) UIView *keyboard;
+@property (nonatomic, strong) UIView *keyboard;
 @property (nonatomic, readwrite) float originalKeyboardY; 
 
 - (void)keyboardWillShow;

@@ -21,6 +21,6 @@
 @interface MADismissiveTextView : UITextView
 
 @property (nonatomic, weak) id <MADismissiveKeyboardDelegate> keyboardDelegate;
-@property (nonatomic, retain) UIPanGestureRecognizer *dismissivePanGestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer *dismissivePanGestureRecognizer;
 
 @end
