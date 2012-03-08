@@ -25,6 +25,6 @@ The @MADismissiveKeyboardDelegate@ protocol allows you to make changes to your U
 <pre>
 - (void)keyboardDidShow;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
-- (void)keyboardWillGetDismissed;
+- (void)keyboardWillBeDismissed;
 - (void)keyboardWillSnapBack;
 </pre>
