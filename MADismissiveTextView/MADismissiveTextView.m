@@ -13,8 +13,8 @@
 @property (nonatomic, strong) UIView *keyboard;
 @property (nonatomic, readwrite) float originalKeyboardY; 
 
-- (void)keyboardWillShow:(NSNotification *)notification;
-- (void)keyboardDidShow:(NSNotification *)notification;
+- (void)keyboardWillShow;
+- (void)keyboardDidShow;
 - (void)panning:(UIPanGestureRecognizer *)pan;
 
 @end
@@ -49,11 +49,11 @@
     [dismissivePanGestureRecognizer addTarget:self action:@selector(panning:)];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification{
+- (void)keyboardWillShow{
     self.keyboard.hidden = NO;
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification{
+- (void)keyboardDidShow{
     self.keyboard = self.inputAccessoryView.superview;
     if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)]){
         [self.keyboardDelegate keyboardDidShow];
